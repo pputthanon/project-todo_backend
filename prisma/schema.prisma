@@ -8,11 +8,10 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
+  email    String @unique
   name     String
   password String
-  isAdmin  Boolean? @default(false)
-  picture  String?
   task     Task[]
 }
 
@@ -20,7 +19,7 @@ model Task {
   id        Int       @id @default(autoincrement())
   task      String
   createdAt DateTime  @default(now()) @db.Timestamp(2)
-  editedAt  DateTime  @default(now()) @db.Timestamp(2)
+  editedAt  DateTime? @default(now()) @db.Timestamp(2)
   dueDate   DateTime? @db.Date()
   status    Status    @default(in_progress)
   user      User      @relation(fields: [userId], references: [id])
