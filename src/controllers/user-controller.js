@@ -27,17 +27,17 @@ exports.getTaskByUserId = async (req, res, next) => {
   try {
     const { id } = req.user;
 
-    const allTask = await prisma.task.findMany({
+    const tasks = await prisma.task.findMany({
       where: {
         userId: id,
       },
     });
 
-    if (!task) {
+    if (!tasks) {
       return next(createError("This user doesn't have any task", 404));
     }
 
-    res.status(200).json({ allTask });
+    res.status(200).json({ tasks });
   } catch (err) {
     next(err);
   }

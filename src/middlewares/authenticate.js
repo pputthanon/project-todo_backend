@@ -17,7 +17,6 @@ module.exports = async (req, res, next) => {
       process.env.JWT_SECRET_KEY || "qwertyuio"
     );
 
-    console.log(payload);
     const user = await prisma.user.findUnique({
       where: {
         id: payload.userId,

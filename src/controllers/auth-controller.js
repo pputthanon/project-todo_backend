@@ -12,8 +12,6 @@ exports.register = async (req, res, next) => {
       return next(error);
     }
 
-    console.log(value.password);
-
     value.password = await bcrypt.hash(value.password, 12);
 
     const user = await prisma.user.create({
@@ -21,7 +19,6 @@ exports.register = async (req, res, next) => {
     });
 
     const payload = { userId: user.id };
-    console.log(payload);
 
     const accessToken = jwt.sign(
       payload,
