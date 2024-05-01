@@ -31,6 +31,9 @@ exports.getTaskByUserId = async (req, res, next) => {
       where: {
         userId: id,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     if (!tasks) {
